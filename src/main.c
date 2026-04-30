@@ -1,6 +1,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
+#include <zephyr/dfu/mcuboot.h>
 
 #define LED0_NODE DT_ALIAS(led0)
 
@@ -12,27 +13,36 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 static int led_init(void)
 {
-	if (!gpio_is_ready_dt(&led)) {
-		printk("LED device is not ready\n");
-		return -1;
-	}
-
-	return gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
+        if (!gpio_is_ready_dt(&led)) {
+                printk("LED device is not ready\n");
+                return -1;
+        }
+        return gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
 }
 
 int main(void)
 {
-	if (led_init() < 0) {
-		printk("LED init failed\n");
-	}
+        if (led_init() < 0) {
+                printk("LED init failed\n");
+        }
 
-	printk("Hello from app VERSION 1.0.1 UART1 OTA\n");
+        printk("Hello from app VERSION 1.0.1\n");
 
-	while (1) {
-		gpio_pin_toggle_dt(&led);
-		printk("App running...\n");
-		k_msleep(1000);
-	}
-
-	return 0;
+        int confirm_timer = 0;
+        while (1) {
+                gpio_pin_toggle_dt(&led);
+                printk("App running...\n");
+                
+                if (confirm_timer < 15) {
+                        confirm_timer++;
+                        printk("Will confirm image in %d secs (reboot now to test rollback)\n", 15 - confirm_timer);
+                        if (confirm_timer == 15) {
+                                printk("Confirming image to prevent rollback...\n");
+                                boot_write_img_confirmed();
+                                printk("Image confirmed! Update is permanent.\n");
+                        }
+                }
+                k_msleep(1000);
+        }
+        return 0;
 }
