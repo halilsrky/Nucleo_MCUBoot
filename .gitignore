@@ -135,7 +135,6 @@ Thumbs.db
 # Zephyr generated configs
 # =========================
 *.config
-*.conf
 *.dts_compiled
 *.dtb
 *.lst

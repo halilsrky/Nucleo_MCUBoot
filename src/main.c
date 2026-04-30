@@ -26,7 +26,7 @@ int main(void)
 		printk("LED init failed\n");
 	}
 
-	printk("Hello from app\n");
+	printk("Hello from app VERSION 1.0.1\n");
 
 	while (1) {
 		gpio_pin_toggle_dt(&led);
