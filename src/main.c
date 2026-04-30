@@ -31,7 +31,7 @@ int main(void)
         int confirm_timer = 0;
         while (1) {
                 gpio_pin_toggle_dt(&led);
-                printk("App running1...\n");
+                printk("version 1.0.1\n");
                 
                 if (confirm_timer < 15) {
                         confirm_timer++;
