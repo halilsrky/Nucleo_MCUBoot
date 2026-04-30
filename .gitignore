@@ -1,0 +1,141 @@
+# .gitignore for Zephyr / CMake MCU projects
+# Ignore build outputs, IDE files, generated artifacts and sensitive keys
+
+# Build directories
+build*/
+build_*/
+build_app/
+build_mcuboot/
+
+# CMake / Ninja
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+build.ninja
+*.ninja
+*.ninja_log
+*.ninja_deps
+
+# Zephyr build/artifacts
+zephyr/
+app/
+linker_*.cmd
+linker.cmd
+linker.cmd.dep
+isr_tables*.ld
+
+# Object and binary files
+*.o
+*.a
+*.elf
+*.bin
+*.hex
+*.uf2
+*.map
+*.lst
+*.d
+
+# Logs, reports, temporary
+*.log
+*.trace
+*.out
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Swap / backup files
+*~
+*.swp
+
+# Keys / certificates (sensitive)
+keys/
+*.pem
+*.key
+*.crt
+
+# Misc
+.cache/
+.repo/
+.west/
+.coverage
+# =========================
+# Zephyr Build Outputs
+# =========================
+build/
+out/
+zephyr/zephyr.bin
+zephyr/zephyr.hex
+zephyr/zephyr.elf
+zephyr/zephyr.map
+
+# CMake / Ninja
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build.ninja
+rules.ninja
+compile_commands.json
+
+# =========================
+# West workspace
+# =========================
+.west/
+west.yml.lock
+modules/
+bootloader/
+mcuboot/
+
+# =========================
+# Python (west + zephyr tools)
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Logs / temp
+# =========================
+*.log
+*.tmp
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Zephyr generated configs
+# =========================
+*.config
+*.conf
+*.dts_compiled
+*.dtb
+*.lst
